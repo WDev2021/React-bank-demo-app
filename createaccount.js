@@ -7,16 +7,23 @@ function CreateAccount(){
   const ctx = React.useContext(UserContext);  
 
   function validate(field, label){
-      if (!field) {
-        setStatus('Error: ' + label);
-        setTimeout(() => setStatus(''),3000);
-        return false;
-      }
-      return true;
+    if (!field) {
+      setStatus('Error: ' + label);
+      alert ('Please fill your ' + label);
+      setTimeout(() => setStatus(''),3000);
+      return false;
+    } else if (field === password && password.toString().length < 8) {
+      setStatus('Error: ' + label);
+      alert (label + ' must be longer than 8 charaters');
+      setTimeout(() => setStatus(''),3000);
+      return false;
+    }
+    return true;
   }
-
+  
   function handleCreate(){
     console.log(name,email,password);
+    console.log(password.toString().length);
     if (!validate(name,     'name'))     return;
     if (!validate(email,    'email'))    return;
     if (!validate(password, 'password')) return;
